@@ -20,6 +20,97 @@
     <meta name="twitter:description" content="We provide reliable IT support, consulting, and infrastructure solutions designed specifically for SMEs.">
     <meta name="twitter:image" content="https://techtifyph.com/og-image.svg">
     
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Techtify",
+        "description": "Enterprise-grade IT support, consulting, and infrastructure solutions for SMEs in Metro Manila.",
+        "url": "https://techtifyph.com",
+        "telephone": "+63-XXX-XXXX",
+        "email": "hello@techtifyph.com",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Metro Manila",
+            "addressCountry": "PH"
+        },
+        "areaServed": {
+            "@type": "State",
+            "name": "Metro Manila"
+        },
+        "priceRange": "$$",
+        "openingHours": "Mo-Fr 09:00-18:00",
+        "image": "https://techtifyph.com/og-image.svg",
+        "sameAs": []
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Techtify",
+        "url": "https://techtifyph.com",
+        "serviceType": ["IT Support", "IT Consulting", "Managed Services", "Network Infrastructure"],
+        "description": "IT services and consulting for SMEs without an IT department."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "How much does IT support cost for a small business in the Philippines?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "IT support costs vary based on your needs. We offer both project-based and retainer models tailored to SME budgets. Contact us for a free consultation to get a customized quote."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What IT services do you offer for small businesses?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "We offer managed IT support, IT consulting and roadmapping, cloud and modern workplace solutions, network infrastructure, web and systems project coordination, and device procurement advisory."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Do you provide remote IT support?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, we provide both on-site support in Metro Manila and remote support for teams across the APAC region."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can you help set up our company's IT infrastructure from scratch?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Absolutely. We help businesses set up their complete IT infrastructure, from network design and device procurement to cloud migration and security policies."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How do I know if my business needs managed IT support?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "If your team spends too much time fixing tech issues, lacks dedicated IT staff, or needs reliable technology to support growth, managed IT support can help. We offer free assessments to determine your needs."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What industries do you specialize in?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "We work with small and medium enterprises across various industries, bringing enterprise-grade IT practices adapted for smaller teams."
+                }
+            }
+        ]
+    }
+    </script>
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
@@ -574,6 +665,71 @@
             line-height: 1.7;
         }
 
+        /* FAQ */
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 900px;
+        }
+
+        .faq-item {
+            background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.008) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(15, 118, 110, 0.3);
+        }
+
+        .faq-item[open] {
+            border-color: rgba(15, 118, 110, 0.4);
+        }
+
+        .faq-item summary {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--white);
+            list-style: none;
+            padding-right: 24px;
+            position: relative;
+        }
+
+        .faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-item summary::after {
+            content: '+';
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size: 1.25rem;
+            color: var(--dark-green-hover);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item[open] summary::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-item p {
+            margin-top: 16px;
+            font-size: 0.9rem;
+            color: var(--grey-light);
+            line-height: 1.7;
+        }
+
+        @media (max-width: 768px) {
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* Process */
         .process-grid {
             display: grid;
@@ -984,6 +1140,7 @@
                 <a href="#services">Services</a>
                 <a href="#why">Why Techtify</a>
                 <a href="#expertise">Expertise</a>
+                <a href="#faq">FAQ</a>
                 <a href="#process">Process</a>
                 <a href="#contact">Contact</a>
                 <a href="#contact" class="btn btn-primary btn-nav">Book a Consult</a>
@@ -1188,6 +1345,42 @@
                         <h3>Ongoing Support</h3>
                         <p>Optionally, we provide continued support through a retainer model to maintain stability and address new needs.</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-label">Common Questions</span>
+                    <h2>Frequently Asked Questions</h2>
+                    <p>Got questions? Find answers to common IT support and consulting questions below.</p>
+                </div>
+                <div class="faq-grid">
+                    <details class="faq-item">
+                        <summary>How much does IT support cost for a small business in the Philippines?</summary>
+                        <p>IT support costs vary based on your needs. We offer both project-based and retainer models tailored to SME budgets. Contact us for a free consultation to get a customized quote.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>What IT services do you offer for small businesses?</summary>
+                        <p>We offer managed IT support, IT consulting and roadmapping, cloud and modern workplace solutions, network infrastructure, web and systems project coordination, and device procurement advisory.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Do you provide remote IT support?</summary>
+                        <p>Yes, we provide both on-site support in Metro Manila and remote support for teams across the APAC region.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Can you help set up our company's IT infrastructure from scratch?</summary>
+                        <p>Absolutely. We help businesses set up their complete IT infrastructure, from network design and device procurement to cloud migration and security policies.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>How do I know if my business needs managed IT support?</summary>
+                        <p>If your team spends too much time fixing tech issues, lacks dedicated IT staff, or needs reliable technology to support growth, managed IT support can help. We offer free assessments to determine your needs.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>What industries do you specialize in?</summary>
+                        <p>We work with small and medium enterprises across various industries, bringing enterprise-grade IT practices adapted for smaller teams.</p>
+                    </details>
                 </div>
             </div>
         </section>
