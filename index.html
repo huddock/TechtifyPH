@@ -880,6 +880,89 @@
             background: var(--grey-dark);
         }
 
+        .custom-contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--light);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 14px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            background: var(--grey-dark);
+            color: var(--light);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            padding: 16px 32px;
+            background: var(--primary);
+            color: var(--dark);
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.2s ease;
+            margin-top: 8px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            background: var(--light-green);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-status {
+            text-align: center;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .form-status.success {
+            background: rgba(0, 212, 170, 0.1);
+            color: var(--primary);
+        }
+
+        .form-status.error {
+            background: rgba(255, 82, 82, 0.1);
+            color: #ff5252;
+        }
+
         .priority-note {
             margin-top: 20px;
             font-size: 0.8rem;
@@ -888,6 +971,26 @@
             display: flex;
             align-items: center;
             gap: 8px;
+        }
+
+        .contact-map {
+            margin-top: 24px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+        }
+
+        .contact-map iframe {
+            display: block;
+            width: 100%;
+            height: 350px;
+        }
+
+        @media (max-width: 768px) {
+            .contact-map iframe {
+                height: 250px;
+            }
         }
 
         .priority-note::before {
@@ -1408,15 +1511,45 @@
                                 </svg>
                                 <span>hello@techtifyph.com</span>
                             </div>
+                            <div class="contact-map">
+                                <iframe 
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d123564.94576932862!2d120.89881380983553!3d14.599512353834197!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397ca03571ae38d%3A0x69a5f7a5e8f7574c!2sMetro%20Manila%2C%20Philippines!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s" 
+                                    width="100%" 
+                                    height="200" 
+                                    style="border:0;" 
+                                    allowfullscreen="" 
+                                    loading="lazy" 
+                                    referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
+                            </div>
                         </div>
                     </div>
                     <div class="contact-form-wrapper">
                         <h3>Send an Inquiry</h3>
-                        <!-- TODO: Replace the src value below with the actual Google Form embed URL -->
-                        <iframe 
-                            src="https://docs.google.com/forms/d/e/1FAIpQLSd4-B5nPqWBAdXIy0Qbf6DBPUJ6mTaYPehFw5L-m94AcweghQ/viewform?usp=publish-editor" 
-                            title="Contact Form">
-                        </iframe>
+                        <form id="contactForm" class="custom-contact-form">
+                            <div class="form-group">
+                                <label for="name">Name *</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="company">Company</label>
+                                <input type="text" id="company" name="company">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message *</label>
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Send Message</button>
+                            <p id="formStatus" class="form-status"></p>
+                        </form>
                         <p class="priority-note">For urgent matters, send an email with "Priority" in the subject line.</p>
                     </div>
                 </div>
@@ -1434,5 +1567,50 @@
             </div>
         </div>
     </footer>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const form = this;
+            const submitBtn = form.querySelector('.submit-btn');
+            const status = document.getElementById('formStatus');
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            status.textContent = '';
+            status.className = 'form-status';
+            
+            // REPLACE 'YOUR_FORMSPREE_ID' with your Formspree form ID from https://formspree.io/
+            const formspreeUrl = 'https://formspree.io/f/xpqjgwoz';
+            
+            const formData = new FormData(form);
+            
+            try {
+                const response = await fetch(formspreeUrl, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    status.textContent = 'Thank you! Your message has been sent successfully.';
+                    status.className = 'form-status success';
+                    form.reset();
+                } else {
+                    const data = await response.json();
+                    status.textContent = 'Error: ' + (data.error || 'Failed to submit form. Please try again.');
+                    status.className = 'form-status error';
+                }
+            } catch (error) {
+                status.textContent = 'Error: Failed to submit form. Please try again.';
+                status.className = 'form-status error';
+            }
+            
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send Message';
+        });
+    </script>
 </body>
 </html>
