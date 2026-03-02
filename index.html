@@ -924,26 +924,29 @@
 
         .submit-btn {
             padding: 16px 32px;
-            background: var(--primary);
-            color: var(--dark);
+            background: linear-gradient(135deg, var(--dark-green) 0%, #0d5f58 100%);
+            color: var(--white);
             border: none;
             border-radius: 8px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s ease, background 0.2s ease;
+            transition: all 0.2s ease;
             margin-top: 8px;
+            box-shadow: 0 2px 8px rgba(15, 118, 110, 0.3);
         }
 
         .submit-btn:hover {
             transform: translateY(-2px);
-            background: var(--light-green);
+            background: linear-gradient(135deg, var(--dark-green-hover) 0%, var(--dark-green) 100%);
+            box-shadow: 0 4px 16px rgba(15, 118, 110, 0.4);
         }
 
         .submit-btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
+            box-shadow: none;
         }
 
         .form-status {
